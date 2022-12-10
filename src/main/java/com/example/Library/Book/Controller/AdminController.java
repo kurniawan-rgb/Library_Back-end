@@ -28,7 +28,7 @@ public class AdminController {
     public String adminHome(Model model) {
         User currentUser = currentUserFinder.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
-        return "Halo";
+        return "admin/admin-home";
     }
 
     @GetMapping(value="/manageaccounts")
@@ -49,7 +49,7 @@ public class AdminController {
 
         User user = userService.findById(userId);
         model.addAttribute("user", user);
-        return "admin/admin-manage-account.html";
+        return "/admin/admin-manage-account";
     }
 
     @PutMapping(value="/confirmaccountsettings")
@@ -60,7 +60,7 @@ public class AdminController {
         model.addAttribute("role", role);
         model.addAttribute("accStatus", accStatus);
         model.addAttribute("user", userService.findById(userId));
-        return "admin/admin-confirm-account-settings.html";
+        return "/admin/admin-confirm-account-settings";
     }
 
     @PutMapping(value="/saveaccountsettings")
@@ -76,7 +76,7 @@ public class AdminController {
 
     @GetMapping(value="/accountsettingssaved")
     public String accountSettingsSaved() {
-        return "admin/admin-account-settings-saved.html";
+        return "/admin/admin-account-settings-saved";
     }
 }
 
