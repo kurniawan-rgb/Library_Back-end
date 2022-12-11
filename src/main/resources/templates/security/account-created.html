@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Acount Di Buat</title>
+</head>
+<body>
+<div class="wrapperAccountCreated">
+  <div class="containerAccountCreated">
+    <p>Account created!</p>
+    <form th:action="/login" method="GET">
+      <input class="accountCreatedButton" type="submit" value="Go back to login page"/>
+    </form>
+  </div>
+</div>
+</body>
+</html>

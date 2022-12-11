@@ -38,7 +38,7 @@ public class SecurityControlller {
     public String saveNewAccount(User account) {
         account.setPassword(pwEncoder.encode(account.getPassword()));
         accService.save(account);
-        return "redirect:/register/accountcreated";
+        return "redirect:/login";
     }
 
     @GetMapping(value="/register/accountcreated")

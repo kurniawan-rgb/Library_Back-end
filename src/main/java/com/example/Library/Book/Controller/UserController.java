@@ -154,8 +154,15 @@ public class UserController {
         model.addAttribute("author", author);
         model.addAttribute("showAllBooks", showAllBooks);
         model.addAttribute("books", books);
-        return "user/user-browse-books.html";
+        return "user/user-book.html";
     }
+
+//    @GetMapping(value = "/browsebooks")
+//    public String browseBooks(Model model){
+//        List<Book> books = bookService.findAll();
+//        model.addAttribute("books",books);
+//        return "user/user-book.html";
+//    }
 
     @GetMapping(value="/FAQ")
     public String FAQ() {
