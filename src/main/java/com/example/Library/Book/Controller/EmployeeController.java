@@ -10,6 +10,7 @@ import com.example.Library.Book.Service.UserService;
 import com.example.Library.Book.Tambahan.FineCalculator;
 import com.example.Library.Book.Tambahan.ListingStringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
+@Controller
+@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
@@ -42,7 +45,7 @@ public class EmployeeController {
         long currentUserId = currentUserFinder.getCurrentUserId();
         User currentUser = usService.findById(currentUserId);
         model.addAttribute("currentUser", currentUser);
-        return"employee/employee-home.html";
+        return"employee/employee-home";
     }
 
     @GetMapping(value="/users/showusers")
@@ -89,7 +92,7 @@ public class EmployeeController {
         else books = bookService.findAll();
 
         model.addAttribute("books", books);
-        return "employee/employee-show-books.html";
+        return "employee/employee-book.html";
     }
 
     @GetMapping(value="/books/newbook")

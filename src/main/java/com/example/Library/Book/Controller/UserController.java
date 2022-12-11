@@ -52,8 +52,10 @@ public class UserController {
     @GetMapping
     public String userHome(Model model) {
         User currentUser = currentUserFinder.getCurrentUser();
-        model.addAttribute("booksWithFines", fineCalculator.selectBooksWithFines(currentUser.getBooks()));
+        List<Book> books = currentUser.getBooks();
+//        model.addAttribute("booksWithFines", fineCalculator.selectBooksWithFines(currentUser.getBooks()));
         model.addAttribute("currentUser", currentUser);
+        model.addAttribute("books", books);
         return "user/user-home.html";
     }
 
@@ -175,22 +177,23 @@ public class UserController {
                                  @RequestParam Double amountToPay,
                                  Model model) {
 
-        model.addAttribute("amountToPay", amountToPay);
         model.addAttribute("reservedBookIdsInString", reservedBookIdsInString);
-        return "user/user-pay-reservation.html";
+        return "redirect:/user/savereservation";
     }
 
-    @PutMapping(value="browsebooks/savereservation")
-    public String saveBookReservations(@RequestParam String reservedBookIdsInString) {
+    @PostMapping(value="/browsebooks/savereservation")
+    public String saveBookReservations(@RequestParam String reservedBookIdsInString,
+                                       Model model) {
+        model.addAttribute("reservedBookIdsInString", reservedBookIdsInString);
         Set<Long> reservedBookIds = listConverter.convertListInStringToSetInLong(reservedBookIdsInString);
         dateTracker.setReserervationDatesAndReservedByCurrentUserForMultipleBooks(reservedBookIds);
-        return "redirect:/user/yourreservations";
+        return "redirect:/user/yourreservations ";
     }
 
     @GetMapping(value="/yourreservations")
     public String yourReservations(Model model) {
         User currentUser = currentUserFinder.getCurrentUser();
         model.addAttribute("reservedBooks", currentUser.getReservedBooks());
-        return "user/user-your-reservations.html";
+        return "user/user-reservation.html";
     }
 }

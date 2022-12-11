@@ -75,10 +75,33 @@
         </div>
     </nav>
 </div>
-<div class="tittle-user mt-3">
+<div class="tittle-user mt-3 mx-2">
     <h2 th:text="${'Selamat Datang Kembali' + ' ' + currentUser.lastName + ' ' + currentUser.firstName}">
         Selamat Datang User
     </h2>
+    <p th:if="${books.size() == 0 }">
+        Buku Yang dipinjam
+    </p>
+    <table th:if="${books.size() > 0}" class="table mx-2 table-dark table-striped table-peminjaman">
+        <thead>
+        <tr>
+            <th scope="col">Judul</th>
+            <th scope="col">Penulis</th>
+            <th scope="col">Tahun Terbit</th>
+            <th scope="col">Edisi</th>
+            <th scope="col">Waktu Pengembalian</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td> [[${book.key.title}]]</td>
+            <td> [[${book.key.author}]]</td>
+            <td> [[${book.key.relaseYear}]]</td>
+            <td> [[${book.key.edition}]]</td>
+            <td> [[${book.key.returnDate}]]</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
